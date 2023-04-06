@@ -1,9 +1,16 @@
 package com.project.sportyshoes.entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,8 +25,9 @@ public class Category {
 	private String name;
 	private String discription;
 
-	@OneToMany(mappedBy = "catogory")
-	private Set<Product> products = new HashSet<>();
+	@OneToMany(mappedBy = "category")
+	@JsonIgnore
+	private List<Product> products = new ArrayList<>();
 
 	public Category() {
 	}
@@ -54,17 +62,18 @@ public class Category {
 		this.discription = discription;
 	}
 
-	public Set<Product> getProducts() {
+	public List<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Set<Product> products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
 
 	@Override
 	public String toString() {
-		return "Catogory [id=" + id + ", name=" + name + ", discription=" + discription + ", product=" + products + "]";
+		return "Category [id=" + id + ", name=" + name + ", discription=" + discription + ", products=" + products
+				+ "]";
 	}
 
 }

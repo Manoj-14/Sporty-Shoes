@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.sportyshoes.entity.Category;
@@ -23,7 +25,7 @@ public class CatogoryController {
 	CategoryService categoryService;
 
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String create(@RequestBody Category catogory) {
+	public String create(@ModelAttribute Category catogory) {
 		try {
 			int res = categoryService.create(catogory);
 			return res + " Added";

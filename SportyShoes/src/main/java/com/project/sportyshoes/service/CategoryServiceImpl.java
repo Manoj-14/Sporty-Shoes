@@ -15,30 +15,29 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
 	CategoryRepository catogoryRepository;
-	
+
 	@Override
 	public int create(Category catogory) throws DuplicateIdException {
-		if(catogoryRepository.existsByName(catogory.getName())) {
+		if (catogoryRepository.existsByName(catogory.getName())) {
 			throw new DuplicateIdException(catogory.getName());
-		}
-		else {
+		} else {
 			return catogoryRepository.save(catogory).getId();
 		}
 	}
 
 	@Override
-	public List<Category> findAll(){
+	public List<Category> findAll() {
 		List<Category> catogories = (List<Category>) catogoryRepository.findAll();
+		for(Category category: catogories) System.out.println(category);
 		return catogories;
 	}
 
 	@Override
 	public Category find(String Name) throws DataNotFoundException {
 		Category catogory = catogoryRepository.findByName(Name);
-		if(catogory == null) {
+		if (catogory == null) {
 			throw new DataNotFoundException();
-		}
-		else {			
+		} else {
 			return catogory;
 		}
 	}
