@@ -23,7 +23,7 @@ public class AdminController {
 	AdminService adminService;
 
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String create(@RequestBody Admin admin) {
+	public String create(@ModelAttribute Admin admin) {
 		int res;
 		try {
 			res = adminService.create(admin);
