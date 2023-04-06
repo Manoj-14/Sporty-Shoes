@@ -4,11 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.sportyshoes.entity.Admin;
@@ -26,7 +24,6 @@ public class AdminController {
 
 	@RequestMapping(value = "create", method = RequestMethod.POST)
 	public String create(@RequestBody Admin admin) {
-		System.out.println(admin);
 		int res;
 		try {
 			res = adminService.create(admin);
