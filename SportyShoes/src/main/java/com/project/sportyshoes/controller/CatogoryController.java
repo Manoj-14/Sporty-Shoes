@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.sportyshoes.entity.Category;
 import com.project.sportyshoes.exception.DataNotFoundException;
 import com.project.sportyshoes.exception.DuplicateIdException;
-import com.project.sportyshoes.service.CategoryServiceImpl;
+import com.project.sportyshoes.service.CategoryService;
 
 @Controller
 @RestController
 @RequestMapping("category")
 public class CatogoryController {
 	@Autowired
-	CategoryServiceImpl categoryService;
+	CategoryService categoryService;
 
 	@RequestMapping(value = "create", method = RequestMethod.POST)
 	public String create(@RequestBody Category catogory) {

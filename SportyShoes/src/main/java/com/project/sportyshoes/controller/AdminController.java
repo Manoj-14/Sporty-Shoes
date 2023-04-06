@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.sportyshoes.entity.Admin;
 import com.project.sportyshoes.exception.DataNotFoundException;
 import com.project.sportyshoes.exception.DuplicateIdException;
-import com.project.sportyshoes.service.AdminServiceImpl;
+import com.project.sportyshoes.service.AdminService;
 
 @Controller
 @RestController
@@ -20,7 +20,7 @@ import com.project.sportyshoes.service.AdminServiceImpl;
 public class AdminController {
 
 	@Autowired
-	AdminServiceImpl adminService;
+	AdminService adminService;
 
 	@RequestMapping(value = "create", method = RequestMethod.POST)
 	public String create(@RequestBody Admin admin) {
@@ -48,7 +48,7 @@ public class AdminController {
 	public Object find(@PathVariable String email, @ModelAttribute("password") String password) {
 		Admin admin;
 		try {
-			admin = adminService.find(email, password);
+			admin = (Admin) adminService.find(email, password);
 			return admin;
 		} catch (DataNotFoundException e) {
 			return e.getMessage();
