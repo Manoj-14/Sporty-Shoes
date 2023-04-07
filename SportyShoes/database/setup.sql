@@ -8,3 +8,6 @@ select * from user;
 
 drop table product;
 drop table category;
+drop table user;
+
+delete from user where email="manoj@gmail.com"
