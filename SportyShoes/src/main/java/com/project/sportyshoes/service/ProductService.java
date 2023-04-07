@@ -17,5 +17,5 @@ public interface ProductService {
 
 	List<Product> findProduct(String name);
 
-	List<Product> findProduct(String catogory_name,Boolean catogory) throws DataNotFoundException;
+	List<Product> findProduct(String catogory_name,Boolean catogory);
 }

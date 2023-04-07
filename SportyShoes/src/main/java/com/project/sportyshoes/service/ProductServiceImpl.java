@@ -45,13 +45,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> findProduct(String name, Boolean catogory) throws DataNotFoundException {
+	public List<Product> findProduct(String name, Boolean catogory) {
 		List<Product> products = productRepository.findByCategoryName(name);
-		if (products.size() <= 0) {
-			throw new DataNotFoundException();
-		} else {
-			return products;
-		}
+		return products;
 	}
 
 }

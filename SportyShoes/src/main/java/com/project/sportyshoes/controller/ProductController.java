@@ -50,5 +50,11 @@ public class ProductController {
 		List<Product> products = productService.findProduct(name);
 		return products;
 	}
+	
+	@RequestMapping(value = "category/{category_name}", method = RequestMethod.GET)
+	public List<Product> findByCatogory(@PathVariable String category_name) {
+		List<Product> products = productService.findProduct(category_name,true);
+		return products;
+	}
 
 }
