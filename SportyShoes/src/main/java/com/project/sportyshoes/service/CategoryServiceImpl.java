@@ -28,7 +28,6 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public List<Category> findAll() {
 		List<Category> catogories = (List<Category>) catogoryRepository.findAll();
-		for(Category category: catogories) System.out.println(category);
 		return catogories;
 	}
 
