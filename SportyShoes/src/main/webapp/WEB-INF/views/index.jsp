@@ -8,5 +8,7 @@
 </head>
 <body>
 	<h2>Welcome</h2>
+	<a href="/adminLogin">Admin Login</a>
+	<a href="/userlogin">User Login</a>
 </body>
 </html>
