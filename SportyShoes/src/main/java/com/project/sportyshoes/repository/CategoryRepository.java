@@ -9,5 +9,8 @@ import com.project.sportyshoes.entity.Category;
 @Repository
 public interface CategoryRepository extends CrudRepository<Category, Integer> {
 	Category findByName(String Name);
+
 	boolean existsByName(String Name);
+
+	void deleteById(int id);
 }

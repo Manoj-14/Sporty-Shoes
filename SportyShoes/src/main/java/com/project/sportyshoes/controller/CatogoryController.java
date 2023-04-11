@@ -6,11 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.project.sportyshoes.entity.Category;
 import com.project.sportyshoes.exception.DataNotFoundException;
@@ -25,13 +24,16 @@ public class CatogoryController {
 	CategoryService categoryService;
 
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String create(@ModelAttribute Category catogory) {
+	public ModelAndView create(@ModelAttribute Category catogory) {
+		ModelAndView mv = new ModelAndView();
 		try {
 			int res = categoryService.create(catogory);
-			return res + " Added";
+			mv.setViewName("redirect:/admin/dashboard");
 		} catch (DuplicateIdException e) {
-			return e.getMessage();
+			mv.setViewName("forward:/admin/dashboard");
+			mv.addObject("message", e.getMessage());
 		}
+		return mv;
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -49,6 +51,18 @@ public class CatogoryController {
 		} catch (DataNotFoundException e) {
 			return e.getMessage();
 		}
+	}
+	
+	@RequestMapping(value = "delete/{id}")
+	public ModelAndView delete(@PathVariable int id) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/admin/dashboard");
+		try {
+			categoryService.delete(id);
+		} catch (Exception e) {
+			mv.addObject("Message", "Error in deleteing");
+		}
+		return mv;
 	}
 
 }
