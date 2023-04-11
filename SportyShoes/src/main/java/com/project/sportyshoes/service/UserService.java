@@ -2,11 +2,11 @@ package com.project.sportyshoes.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import com.project.sportyshoes.entity.User;
 import com.project.sportyshoes.exception.DataNotFoundException;
 import com.project.sportyshoes.exception.DuplicateIdException;
-
-import jakarta.transaction.Transactional;
 
 public interface UserService {
 
@@ -16,5 +16,7 @@ public interface UserService {
 	User getUser(String email, String password) throws DataNotFoundException;
 
 	List<User> loadAll();
+	
+	User find(String email);
 
 }
