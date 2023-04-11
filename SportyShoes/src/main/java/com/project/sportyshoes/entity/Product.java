@@ -1,24 +1,24 @@
 package com.project.sportyshoes.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Shoe")
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
 	private String discription;
-
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+	private double price;
+	@ManyToOne(cascade = { CascadeType.PERSIST })
 	@JoinColumn(name = "category_id")
 	private Category category;
 
@@ -26,10 +26,11 @@ public class Product {
 		super();
 	}
 
-	public Product(String name, String discription, Category catogory) {
+	public Product(String name, String discription, double price, Category category) {
 		this.name = name;
 		this.discription = discription;
-		this.category = catogory;
+		this.price = price;
+		this.category = category;
 	}
 
 	public int getId() {
@@ -56,12 +57,20 @@ public class Product {
 		this.discription = discription;
 	}
 
-	public Category getCatogory() {
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public Category getCategory() {
 		return category;
 	}
 
-	public void setCatogory(Category catogory) {
-		this.category = catogory;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	@Override

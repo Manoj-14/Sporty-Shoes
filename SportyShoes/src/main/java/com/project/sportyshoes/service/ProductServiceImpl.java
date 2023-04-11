@@ -21,11 +21,14 @@ public class ProductServiceImpl implements ProductService {
 	CategoryService categoryService;
 
 	@Override
-	public int create(Product product, String category_name) throws DuplicateIdException, DataNotFoundException {
+	public String create(Product product, String category_name) throws DuplicateIdException, DataNotFoundException {
+		if (productRepository.existsByName(product.getName())) {
+			return "Product with name " + product.getName() + " exists";
+		}
 		try {
 			Category category = categoryService.find(category_name);
-			product.setCatogory(category);
-			int id = productRepository.save(product).getId();
+			product.setCategory(category);
+			String id = productRepository.save(product).getName();
 			return id;
 		} catch (DataNotFoundException e) {
 			throw new DataNotFoundException();
@@ -48,6 +51,39 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> findProduct(String name, Boolean catogory) {
 		List<Product> products = productRepository.findByCategoryName(name);
 		return products;
+	}
+
+	@Override
+	public String update(Product product) throws Exception {
+
+		if (!productRepository.existsById(product.getId())) {
+			throw new Exception("Invalid data please update with unique name or data not found for request id");
+		} else {
+			try {
+				String name = productRepository.save(product).getName();
+				return name;
+			} catch (Exception e) {
+				throw new Exception();
+			}
+		}
+	}
+
+	@Override
+	public void delete(int id) throws Exception {
+
+		if (!productRepository.existsById(id))
+			throw new Exception("Product not found");
+
+		else {
+
+			productRepository.deleteById(id);
+		}
+	}
+
+	@Override
+	public Product findProduct(int id) {
+		Product product = productRepository.findById(id);
+		return product;
 	}
 
 }
