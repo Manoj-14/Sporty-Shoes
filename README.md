@@ -1,4 +1,4 @@
-**Java FSD with Angular: Course End Project 3**
+## Java FSD with Angular: Course End Project 3
 
 **1. Project Details**
 
