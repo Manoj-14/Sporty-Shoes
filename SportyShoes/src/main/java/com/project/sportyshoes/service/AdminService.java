@@ -11,8 +11,10 @@ public interface AdminService {
 	int create(Admin admin) throws DuplicateIdException;
 
 	Admin find(String email) throws DataNotFoundException;
-	
+
 	boolean exists(String email);
-	
-	Object find(String email,String password) throws DataNotFoundException;
+
+	Object find(String email, String password) throws DataNotFoundException;
+
+	void changePassword(String email, String oldPassword, String newPassword) throws Exception;
 }

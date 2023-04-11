@@ -30,8 +30,8 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Admin find(String email) throws DataNotFoundException {
 		Admin admin = adminRepository.findByEmail(email);
-		if(admin == null) {
-			throw new DataNotFoundException() ;
+		if (admin == null) {
+			throw new DataNotFoundException();
 		}
 		return admin;
 	}
@@ -47,8 +47,21 @@ public class AdminServiceImpl implements AdminService {
 		System.out.println(email + " " + password);
 		Admin admin = adminRepository.findByEmailAndPassword(email, password);
 		if (admin == null) {
-			throw new DataNotFoundException() ;
+			throw new DataNotFoundException();
 		}
-		return admin ;
+		return admin;
+	}
+
+	@Override
+	public void changePassword(String email, String oldPassword, String newPassword) throws Exception {
+		
+		Admin admin = adminRepository.findByEmail(email);
+		if (oldPassword.equals(admin.getPassword())) {
+			admin.setPassword(newPassword);
+			adminRepository.save(admin);
+		} else {
+			throw new Exception("Invalid Password");
+		}
+
 	}
 }
